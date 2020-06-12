@@ -1,9 +1,9 @@
 const request = require('supertest');
 const should = require('should');
-const app = require('../index');
+const app = require('../app');
 
 describe('GET /', () => {
-  it('index should contain Hello', (done) => {
+  it('app should contain "Hello World!"', (done) => {
     request(app)
         .get('/')
         .expect(200)
