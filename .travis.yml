@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - 12
+before_install:
+  - npm install
+branches:
+  only:
+    - master
+
+script: "npm test"
+
+# CI 완료 시 메일로 알람
+notifications:
+  email:
+    recipients:
+      - leehodud302@gmail.com
