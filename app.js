@@ -2,35 +2,55 @@ const express = require("express")
 const session = require('express-session');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
+const path = require('path');
 
-const app = express()
+const router = require('./src/router/index');
+
 const options = {
-  host: "0.0.0.0",
-  port: 3000
+    host: "0.0.0.0",
+    port: 3000
 };
 
-app.set('views', './views');
-app.set('view engine', 'ejs');
-app.engine('html', ejs.renderFile);
+class Server {
+    app = null;
 
-app.use(express.static('public'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({
-  secret: 'H*@U#FDNFOSIFJREUtest',
-  resave: false,
-  saveUninitialized: true
-}));
+    constructor() {
+        this.app = express();
 
-app.get("/", (req, res) => {
-  app.render('header.html', (err, renderedData) => {
-    if (err) console.log(err);
-    res.send(renderedData);
-  });
-});
+        this.setMiddleware();
+        this.setRoute();
+        this.setEngine();
+    }
 
-app.listen(options, () =>
-  console.log(`http://${options.host}:${options.port}`)
-)
+    setMiddleware() {
+        this.app.use(express.static('public'));
+        this.app.use(bodyParser.json());
+        this.app.use(bodyParser.urlencoded({ extended: true }));
+        this.app.use(session({
+            secret: 'H*@U#FDNFOSIFJREUtest',
+            resave: false,
+            saveUninitialized: true
+        }));
+    }
 
-module.exports = app;
+    setRoute() {
+        this.app.use(router);
+    }
+
+    setEngine() {
+        // this.app.set('views', './views');
+        this.app.set('views', path.join(__dirname, 'views'));
+        this.app.set('view engine', 'ejs');
+        this.app.engine('html', ejs.renderFile); 
+    }
+
+    listen() {
+        this.app.listen(options, () => console.log(`http://${options.host}:${options.port}`));
+    }
+
+    async start() {
+        this.listen();
+    }
+}
+
+module.exports = Server;

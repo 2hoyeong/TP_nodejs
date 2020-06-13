@@ -2,7 +2,7 @@
   "name": "tp_nodejs",
   "version": "1.0.0",
   "description": "TravelPlanner re-coding from php to nodejs",
-  "main": "app.js",
+  "main": "src/start.js",
   "scripts": {
     "start": "node .",
     "test": "mocha --exit"
@@ -24,6 +24,7 @@
     "express-session": "^1.17.1",
     "mocha": "^8.0.1",
     "should": "^13.2.3",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "yarn": "^1.22.4"
   }
 }
