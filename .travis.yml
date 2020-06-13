@@ -3,7 +3,7 @@ node_js:
   - "12.14"
 
 before_install:
-  - npm install -g yarn
+  - npm install
 
 branches:
   only:
