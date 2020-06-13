@@ -18,6 +18,6 @@ hooks:
     - location: beforeInstall.sh
       timeout: 60
 
-  ApplicationStart:
+  AfterAllowTraffic:
     - location: execute-deploy.sh
       timeout: 60
