@@ -31,6 +31,7 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
     bucket: tp-nodejs-build
+    key: TP_nodejs.zip
     bundle_type: zip
     application: TP_nodejs-cd
     deployment_group: nodejs-deploy-group
