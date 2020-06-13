@@ -22,7 +22,7 @@ deploy:
     bucket: tp-nodejs-build
     region: ap-northeast-2
     skip_cleanup: true
-    local_dir: tp
+    local_dir: docker-image/tp
     wait-until-deployed: true
     on:
       repo: 2hoyeong/TP_nodejs
