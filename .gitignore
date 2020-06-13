@@ -114,6 +114,3 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-
-# yarn 사용으로 인해 필요 없음
-package-lock.json
