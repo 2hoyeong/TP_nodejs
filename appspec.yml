@@ -3,6 +3,7 @@ os: linux
 files:
   - source: /
     destination: /home/ec2-user/docker-image/tp/TP_nodejs/
+    overwrite: yes
 hooks:
   AfterInstall:
     - location: execute-deploy.sh
