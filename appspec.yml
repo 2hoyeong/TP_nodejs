@@ -6,7 +6,7 @@ files:
     overwrite: yes
 hooks:
   BeforeInstall:
-    - location: beforeInstall.sh
+    - location: ../beforeInstall.sh
   AfterInstall:
     - location: execute-deploy.sh
       timeout: 180
