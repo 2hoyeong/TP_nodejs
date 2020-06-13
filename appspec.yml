@@ -7,10 +7,10 @@ files:
     
 permissions:
   - object: /
-    pattern: "**"
+    pattern: "*.sh"
     owner: ec2-user
     group: ec2-user
-    mode: 777
+    mode: 775
 
 hooks:
   BeforeInstall:
