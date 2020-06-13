@@ -3,7 +3,6 @@ os: linux
 files:
   - source: /
     destination: /home/ec2-user/docker-image/tp/TP_nodejs/
-    overwrite: true
     
 permissions:
   - object: /
@@ -18,6 +17,8 @@ hooks:
   BeforeInstall:
     - location: scripts/beforeInstall.sh
       timeout: 60
+      runas: ec2-user
   AfterInstall:
     - location: scripts/execute-deploy.sh
-      timeout: 180
+      timeout: 60
+      runas: ec2-user
