@@ -3,10 +3,10 @@ os: linux
 files:
   - source: /
     destination: /home/ec2-user/docker-image/tp/TP_nodejs/
-    overwrite: yes
+    overwrite: true
 hooks:
   BeforeInstall:
-    - location: beforeInstall.sh
+    - location: scripts/beforeInstall.sh
   AfterInstall:
-    - location: execute-deploy.sh
+    - location: scripts/execute-deploy.sh
       timeout: 180
