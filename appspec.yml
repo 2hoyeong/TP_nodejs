@@ -6,8 +6,8 @@ files:
     overwrite: true
     
 permissions:
-  - object: /
-    pattern: "*.sh"
+  - object: scripts/
+    pattern: "*.*"
     owner: ec2-user
     group: ec2-user
     mode: 775
