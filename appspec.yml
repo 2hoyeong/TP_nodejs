@@ -5,6 +5,8 @@ files:
     destination: /home/ec2-user/docker-image/tp/TP_nodejs/
     overwrite: yes
 hooks:
+  BeforeInstall:
+    - location: beforeInstall.sh
   AfterInstall:
     - location: execute-deploy.sh
       timeout: 180
