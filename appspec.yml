@@ -17,8 +17,7 @@ hooks:
   BeforeInstall:
     - location: beforeInstall.sh
       timeout: 60
-      runas: ec2-user
+
   AfterInstall:
     - location: execute-deploy.sh
       timeout: 60
-      runas: ec2-user
