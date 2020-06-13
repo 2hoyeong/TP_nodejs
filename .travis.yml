@@ -28,7 +28,7 @@ deploy:
       repo: 2hoyeong/TP_nodejs
       branch: master
   - provider: codedeploy
-    acess_key_id: $AWS_ACCESS_KEY
+    access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
     bucket: tp-nodejs-build
     bundle_type: zip
