@@ -7,15 +7,17 @@ files:
 permissions:
   - object: /
     pattern: "**"
+    owner: ec2-user
+    group: ec2-user
     mode: 775
     type:
       - file
 
 hooks:
   BeforeInstall:
-    - location: beforeInstall.sh
+    - location: scripts/beforeInstall.sh
       timeout: 60
 
   AfterInstall:
-    - location: execute-deploy.sh
+    - location: scripts/execute-deploy.sh
       timeout: 60
