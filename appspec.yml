@@ -15,10 +15,10 @@ permissions:
 
 hooks:
   BeforeInstall:
-    - location: scripts/beforeInstall.bash
+    - location: beforeInstall.bash
       timeout: 60
       runas: ec2-user
   AfterInstall:
-    - location: scripts/execute-deploy.sh
+    - location: execute-deploy.sh
       timeout: 60
       runas: ec2-user
