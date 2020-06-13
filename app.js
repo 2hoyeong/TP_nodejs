@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 
 const app = express()
 const options = {
-  host: "127.0.0.1",
+  host: "0.0.0.0",
   port: 3000
 };
 
@@ -15,7 +15,7 @@ app.engine('html', ejs.renderFile);
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
   secret: 'H*@U#FDNFOSIFJREUtest',
   resave: false,

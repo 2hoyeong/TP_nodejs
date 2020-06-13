@@ -9,6 +9,38 @@ branches:
 
 script: "npm test"
 
+before_deploy:
+  - rm -rf node_modules
+  - zip -r TP_nodejs
+  - mkdir -p docker-image/tp
+  - mv TP_nodejs.zip docker-image/tp/TP_nodejs.zip
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: tp-nodejs-build
+    region: ap-northeast-2
+    skip_cleanup: true
+    local_dir: tp
+    wait-until-deployed: true
+    on:
+      repo: 2hoyeong/TP_nodejs
+      branch: master
+  - provider: codedeploy
+    acess_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: tp-nodejs-build
+    bundle_type: zip
+    application: TP_nodejs-cd
+    deployment_group: nodejs-deploy-group
+    region: ap-northeast-2
+    wait-until-deployed: true
+    on:
+      repo: 2hoyeong/TP_nodejs
+      breanch: master
+
+
 # CI 완료 시 메일로 알람
 notifications:
   email:
