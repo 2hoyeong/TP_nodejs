@@ -11,7 +11,7 @@ script: "npm test"
 
 before_deploy:
   - rm -rf node_modules
-  - zip -r TP_nodejs
+  - zip -r TP_nodejs *
   - mkdir -p docker-image/tp
   - mv TP_nodejs.zip docker-image/tp/TP_nodejs.zip
 
