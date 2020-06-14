@@ -1,14 +1,17 @@
+require('dotenv').config();
 const express = require("express")
 const session = require('express-session');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const path = require('path');
+const mongoose = require('mongoose');
 
-const router = require('./src/router/index');
+const indexRouter = require('./src/router/index');
+const loginRouter = require('./src/router/login')
 
 const options = {
-    host: "0.0.0.0",
-    port: 3000
+    host: process.env.HOST,
+    port: process.env.PORT
 };
 
 class Server {
@@ -20,6 +23,7 @@ class Server {
         this.setMiddleware();
         this.setRoute();
         this.setEngine();
+        this.setDB();
     }
 
     setMiddleware() {
@@ -34,11 +38,11 @@ class Server {
     }
 
     setRoute() {
-        this.app.use(router);
+        this.app.use(indexRouter);
+        this.app.use(loginRouter);
     }
 
     setEngine() {
-        // this.app.set('views', './views');
         this.app.set('views', path.join(__dirname, 'views'));
         this.app.set('view engine', 'ejs');
         this.app.engine('html', ejs.renderFile); 
@@ -50,6 +54,13 @@ class Server {
 
     async start() {
         this.listen();
+    }
+
+    async setDB() {
+        mongoose.Promise = global.Promise;
+        mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+            .then(() => console.log('Successfully connected to mongodb'))
+            .catch(e => console.error(e));
     }
 }
 
