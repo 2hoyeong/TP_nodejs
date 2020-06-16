@@ -10,8 +10,8 @@ const userSchema = new Schema({
 
 });
 
-userSchema.methods.verifiedPassword = function (pw, callback) {
-    crypto.pbkdf2(pw, this.salt, 2346, 32, 'sha512', (err, key) => {
+userSchema.methods.verifiedPassword = function (plainPw, callback) {
+    crypto.pbkdf2(plainPw, this.salt, 2346, 32, 'sha512', (err, key) => {
         if (key.toString('base64') === this.pw) {
             callback(null, true);
         } else {
@@ -24,14 +24,14 @@ userSchema.path('id').validate((value) => {
     return value.length >= 6 && value.length <= 14
 }, "ID is too short or long (6 ~ 14)");
 
-userSchema.pre('save', (next) => {
+userSchema.post('save', (doc) => {
+    console.log(doc.pw);
     crypto.randomBytes(32, (err, buf) => {
-        this.salt = buf.toString('base64');
-        crypto.pbkdf2(this.pw, this.salt, 2346, 32, 'sha512', (err, key) => {
-            this.pw = key.toString('base64');
+        doc.salt = buf.toString('base64');
+        crypto.pbkdf2(doc.pw, doc.salt, 2346, 32, 'sha512', (err, key) => {
+            doc.pw = key.toString('base64');
         });
     });
-    next();
 });
 
 module.exports = mongoose.model('user', userSchema);
