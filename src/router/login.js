@@ -6,7 +6,7 @@ router.get("/forgot_id", controller.forgotIdView);
 router.get("/forgot_pw", controller.forgotPwView);
 router.get("/register", controller.registerView);
 
-router.post("/api/login");
+router.post("/api/login", controller.loginCheck);
 router.post("/api/register", controller.userRegister);
 
 module.exports = router;

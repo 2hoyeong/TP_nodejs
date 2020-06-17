@@ -1,4 +1,6 @@
-const User = require("../model/user");
+const User = require("../model/User");
+const crypto = require('crypto');
+const { throws } = require("assert");
 
 exports.loginView = function (req, res) {
     res.render('login/login.html', (err, renderedData) => {
@@ -35,25 +37,65 @@ exports.userRegister = function(req, res) {
     user.email = req.body.email;
 
     if (req.body.password_1 !== req.body.password_2) {
-        res.json({result: 0, error: "password does not matched"})
+        res.json({result: 0, error: "패스워드를 올바르게 두번 입력하세요."});
         return;
     }
 
-    user.save((err) => {
-        if (err) {
-            console.log(err);
-            res.json({result: 0, err});
-            return;
-        }
-        res.json({result: 1})
+    generateSalt(32)
+    .then(salt => {
+        user.salt = salt;
+        return encryptPassword(user.pw, salt);
+    })
+    .then(key => {
+        user.pw = key;
+        return user.save();
+    })
+    .then(() => {return res.json({result: 1})})
+    .catch(err => {
+        res.json({result: 0, err});
+        return;
     });
 }
 
 exports.loginCheck = function(req, res) {
-    const user = {
-        id : req.body.id,
-        pw : req.body.password
-    };
+    const id = req.body.id;
+    const pw = req.body.password;
+    let user;
+    User.find().where('id').equals(id).exec()
+    .then(results => {
+        user = results[0];
+        return encryptPassword(pw, user.salt);
+    })
+    .then((key) => {
+        if (key === user.pw) {
+            return res.json({result: 1});
+        } else {
+            throw '비밀번호가 맞지 않음';
+        }
+    })
+    .catch(e => {
+        res.json({result: 0, error: "ID와 비밀번호를 확인해주세요."});
+    })
+}
 
-    
+const encryptPassword = function (plainPw, salt) {
+    return new Promise((resolve, reject) => {
+        crypto.pbkdf2(plainPw, salt, 2346, 32, 'sha512', (err, key) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(key.toString('base64'));
+        });
+    });
+}
+
+const generateSalt = function(length) {
+    return new Promise((resolve, reject) => {
+        crypto.randomBytes(length, (err, buf) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(buf.toString('base64'));
+        });
+    });
 }

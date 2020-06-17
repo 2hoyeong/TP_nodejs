@@ -5,33 +5,22 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     id: { type: String, required: true, unique: true },
     pw: { type: String, required: true, trim: true },
-    salt: { type: String },
+    salt: { type: String, required: true },
     email: String
 
 });
 
-userSchema.methods.verifiedPassword = function (plainPw, callback) {
-    crypto.pbkdf2(plainPw, this.salt, 2346, 32, 'sha512', (err, key) => {
-        if (key.toString('base64') === this.pw) {
-            callback(null, true);
-        } else {
-            callback('Password is incorrect.');
-        }
-    });
-}
-
 userSchema.path('id').validate((value) => {
     return value.length >= 6 && value.length <= 14
-}, "ID is too short or long (6 ~ 14)");
+}, "아이디가 너무 길거나 짧습니다. (6 ~ 14)");
 
-userSchema.post('save', (doc) => {
-    console.log(doc.pw);
-    crypto.randomBytes(32, (err, buf) => {
-        doc.salt = buf.toString('base64');
-        crypto.pbkdf2(doc.pw, doc.salt, 2346, 32, 'sha512', (err, key) => {
-            doc.pw = key.toString('base64');
-        });
-    });
-});
+userSchema.pre('save', (next) => {
+    /* const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const isEmail = re.test(String(this.email).toLowerCase());
+    if (!isEmail) {
+        throw new Error("이메일 형식이 맞지 않습니다.");
+    } */
+    next();
+})
 
-module.exports = mongoose.model('user', userSchema);
+module.exports = mongoose.model('User', userSchema);
