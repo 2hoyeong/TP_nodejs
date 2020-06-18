@@ -22,14 +22,14 @@
 		</ul>
 
 		<div class="fr gnb_box">
-			<%= // if(!isset($_SESSION['id'])) { %>
+			<% if (!id) { %>
 			<a href="/register" class="fr"><div class="fl gnb_join_btn">회원가입</div></a>
 			<a href="/login" class="fr"><div class="fl gnb_login_btn">로그인</div></a>
-			<%=
-				// } else {
+			<%
+				 } else {
 			%>
-			<a href="/bbs/logout.php" class="fr"><div class="fl gnb_login_btn">로그아웃</div></a>
-			<%= // } %>
+			<a href="/api/logout" class="fr"><div class="fl gnb_login_btn">로그아웃</div></a>
+			<%  } %>
 
 		</div>
 		<div class="clear"></div>

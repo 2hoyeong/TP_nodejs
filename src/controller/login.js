@@ -61,6 +61,7 @@ exports.loginCheck = function(req, res) {
     const id = req.body.id;
     const pw = req.body.password;
     let user;
+    const sess = req.session;
     User.find().where('id').equals(id).exec()
     .then(results => {
         user = results[0];
@@ -68,7 +69,8 @@ exports.loginCheck = function(req, res) {
     })
     .then((key) => {
         if (key === user.pw) {
-            return res.json({result: 1});
+            sess.user = id;
+            res.redirect('/');
         } else {
             throw '비밀번호가 맞지 않음';
         }
@@ -98,4 +100,12 @@ const generateSalt = function(length) {
             resolve(buf.toString('base64'));
         });
     });
+}
+
+exports.logout = function (req, res) {
+    const sess = req.session;
+    sess.destroy(() => {
+        sess;
+    });
+    res.redirect('/');
 }

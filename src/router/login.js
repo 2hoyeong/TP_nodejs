@@ -8,5 +8,6 @@ router.get("/register", controller.registerView);
 
 router.post("/api/login", controller.loginCheck);
 router.post("/api/register", controller.userRegister);
+router.get("/api/logout", controller.logout);
 
 module.exports = router;
