@@ -7,7 +7,8 @@ const path = require('path');
 const mongoose = require('mongoose');
 
 const indexRouter = require('./src/router/index');
-const loginRouter = require('./src/router/login')
+const loginRouter = require('./src/router/login');
+const boardRouter = require('./src/router/community_board')
 
 const options = {
     host: process.env.HOST,
@@ -40,6 +41,7 @@ class Server {
     setRoute() {
         this.app.use(indexRouter);
         this.app.use(loginRouter);
+        this.app.use(boardRouter);
     }
 
     setEngine() {
