@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 const indexRouter = require('./src/router/index');
 const loginRouter = require('./src/router/login');
-const boardRouter = require('./src/router/community_board')
+const boardRouter = require('./src/router/board')
 
 const options = {
     host: process.env.HOST,

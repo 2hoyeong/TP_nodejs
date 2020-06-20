@@ -4,8 +4,8 @@
 	<div class="community_sidemenu fl">
 		<ul>
 			<div class="orange">커뮤니티</div>
-			<a href="javascript:addOrUpdateUrlParam(window.location.href, 'board_title', 'freeboard');"><li>자유게시판</li></a>
-			<a href="javascript:addOrUpdateUrlParam(window.location.href, 'board_title', 'qna');"><li>Q&amp;A</li></a>
+			<a href="/community_board?board_title=freeboard"><li>자유게시판</li></a>
+			<a href="/community_board?board_title=qna"><li>Q&amp;A</li></a>
 		</ul>
 	</div>
 	<div class="community_table_wrap">
@@ -49,7 +49,7 @@
            </ul>
        </div>
 		<div class="btnWrap">
-			<a href="/bbs/write_board.php?bc=<?=$board_code?>"><div class="write_btn gray fr">글쓰기</div></a>
+			<a href="/board_write?board_title=<%=board_title%>"><div class="write_btn gray fr">글쓰기</div></a>
 		</div>
     </div>
 </div>
