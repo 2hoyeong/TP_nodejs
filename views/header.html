@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html"; charset="utf-8">
 </head>
 <body>
-<link rel="stylesheet" type="text/css" href="stylesheets/reset.css?v=<%new Date().getTime()%>">
+<link rel="stylesheet" type="text/css" href="stylesheets/reset.css?v=<%=new Date().getTime()%>">
 <link rel="stylesheet" type="text/css" href="stylesheets/default.css?v=<%=new Date().getTime()%>">
 <link rel="stylesheet" type="text/css" href="stylesheets/main.css?v=<%=new Date().getTime()%>">
 
@@ -17,12 +17,11 @@
 		<ul class="gnb fl">
 			<a href="/bbs/country_list.php" class="fl"><li>여행지</li></a>
 			<a href="/bbs/planning.php" class="fl"><li>일정만들기</li></a>			
-			<a href="/community_board" class="fl"><li>커뮤니티</li></a>			
+			<a href="/board/freeboard" class="fl"><li>커뮤니티</li></a>			
 			<a href="https://www.trivago.co.kr/" class="fl" target="_blank"><li>숙소</li></a>
 		</ul>
 
 		<div class="fr gnb_box">
-			<%= id %>
 			<% if (!id) { %>
 			<a href="/register" class="fr"><div class="fl gnb_join_btn">회원가입</div></a>
 			<a href="/login" class="fr"><div class="fl gnb_login_btn">로그인</div></a>
@@ -34,7 +33,8 @@
 
 		</div>
 		<div class="clear"></div>
-		</div>
-
 	</div>
+
+</div>
+	
 <div id="body">

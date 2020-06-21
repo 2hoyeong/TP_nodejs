@@ -6,17 +6,17 @@ const boardName = {
     qna : "Q&A"
 }
 
-router.get("/community_board", (req, res) => {
-    const title = req.query.board_title ? req.query.board_title : "freeboard";
-    res.render('board/community_board.html',    
+router.get("/board/:title", (req, res) => {
+    const title = req.params.title;
+    res.render('board/board.html',    
     {
         id: req.session.user,
         board_title: boardName[title]
     });
 });
 
-router.get("/board_write", (req, res) => {
-    const title = req.query.board_title ? req.query.board_title : "freeboard";
+router.get("/board_write/:title", (req, res) => {
+    const title = req.params.title;
     res.render('board/board_write.html',
     {
         id: req.session.user,
