@@ -1,5 +1,5 @@
 const router = require('express').Router();
-// const controller = require('../controller/index');
+const controller = require('../controller/post');
 
 const boardName = {
     freeboard : "자유게시판",
@@ -11,7 +11,8 @@ router.get("/board/:title", (req, res) => {
     res.render('board/board.html',    
     {
         id: req.session.user,
-        board_title: boardName[title]
+        board_title_name: boardName[title],
+        board_title: title
     });
 });
 
@@ -20,8 +21,11 @@ router.get("/board_write/:title", (req, res) => {
     res.render('board/board_write.html',
     {
         id: req.session.user,
-        board_title: boardName[title]
+        board_title_name: boardName[title],
+        board_title: title
     })
 })
+
+router.post("/board/write/:title", controller.registPost);
 
 module.exports = router;

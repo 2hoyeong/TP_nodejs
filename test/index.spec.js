@@ -10,7 +10,7 @@ describe('GET /', () => {
         .get('/')
         .expect(200)
         .expect((res) => {
-            res.text.should.containEql('<img src="images/logo.png" class="logo fl" alt="지구 한바퀴">');
+            res.text.should.containEql('<img src="/images/logo.png" class="logo fl" alt="지구 한바퀴">');
         })
         .end((err, res) => {
             if (err) throw err;

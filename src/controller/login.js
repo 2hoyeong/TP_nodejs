@@ -1,6 +1,5 @@
 const User = require("../model/User");
 const crypto = require('crypto');
-const { throws } = require("assert");
 
 exports.loginView = function (req, res) {
     res.render('login/login.html', (err, renderedData) => {
