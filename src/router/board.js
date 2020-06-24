@@ -6,13 +6,15 @@ const boardName = {
     qna : "Q&A"
 }
 
-router.get("/board/:title", (req, res) => {
+router.get("/board/:title/:page", (req, res) => {
     const title = req.params.title;
+    const page = req.params.page;
     res.render('board/board.html',    
     {
         id: req.session.user,
         board_title_name: boardName[title],
-        board_title: title
+        board_title: title,
+        page: page
     });
 });
 

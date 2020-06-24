@@ -8,4 +8,11 @@ exports.registPost = function (req, res) {
     post.title = req.body.bTitle;
     post.content = req.body.bContent;
     console.log(post);
+    
+    post.save()
+    .then(() => {return res.json({result: 1})})
+    .catch(err => {
+        res.json({result: 0, err});
+        return;
+    });
 }
