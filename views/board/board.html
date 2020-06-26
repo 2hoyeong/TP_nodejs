@@ -22,15 +22,14 @@
 				</tr>
 			</thead>
 			<tbody>
+				<% for (var i = 0; i < posts.length; i++) { %>
 				<tr>
-					<td><?=$fetch['PostID']?></td>
-					<td><a href="<?=BBSPATH?>/post.php?id=<?=$fetch['PostID']?>"/><?=$fetch['title']?></a></td>
-					<td><?=$fetch['id']?></td>
-					<td><?=$fetch['date']?></td>
+					<td><%= posts[i].postNumber %></td>
+					<td><a href="/board/post/<%= posts[i].postNumber %>"><%= posts[i].title %></a></td>
+					<td><%= posts[i].author %></td>
+					<td><%= posts[i].time %></td>
 				</tr>
-				<?php
-					}
-				?>
+				<% } %>
 			</tbody>
 		</table>
 	</div>

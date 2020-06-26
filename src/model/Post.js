@@ -1,12 +1,26 @@
 const mongoose = require('mongoose');
+const autoIncrement = require('mongoose-auto-increment');
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
-    id: { type: String, required: true, unique: true },
+    postNumber: { type: Number, required: true, unique: true },
+    author: { type: String, required: true },
     boardName : { type: String, required: true },
     title: { type: String },
     content: { type: String },
     time : { type : Date, default: Date.now }
+});
+
+/*postSchema.post('save', (doc) => {
+    console.log(doc);
+})*/
+
+autoIncrement.initialize(mongoose.connection);
+postSchema.plugin(autoIncrement.plugin, {
+    model:'Post',
+    field: 'postNumber', // auto-increment할 field
+    startAt: 1,
+    increment: 1
 });
 
 module.exports = mongoose.model('Post', postSchema);

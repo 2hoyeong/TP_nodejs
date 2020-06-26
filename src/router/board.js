@@ -20,4 +20,6 @@ router.get("/board_write/:title", (req, res) => {
 
 router.post("/board/write/:title", controller.registPost);
 
+// router.get("/board/reset", controller.postRest); // for debug
+
 module.exports = router;

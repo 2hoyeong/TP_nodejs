@@ -8,11 +8,12 @@ const boardName = {
 
 exports.registPost = function (req, res) {
     const post = new Post();
-    post.id = req.session.user;
+    post.author = req.session.user;
     post.boardName = req.params.title;
     post.title = req.body.bTitle;
     post.content = req.body.bContent;
-    console.log(post);
+
+    console.log("POST : " + post);
 
     post.save()
     .then(() => {return res.json({result: 1})})
@@ -22,19 +23,13 @@ exports.registPost = function (req, res) {
     });
 }
 
-/* 
-const board = Post.find({})
-.sort({ createAt: -1 })
-.skip(hidePost)
-.limit(maxPost);
-*/
 
 exports.viewPostList = function (req, res) {
     const title = req.params.title;
     const page = req.params.page;
     const maxPostOnPage = 10;
-    paginate.getPostsPage(page, maxPostOnPage, (result) => {
-        console.log(result);
+    paginate.getPostsPage(page, maxPostOnPage, title, (result) => {
+        console.log("RESULT : " + result);
         res.render('board/board.html',    
         {
             id: req.session.user,
@@ -43,5 +38,12 @@ exports.viewPostList = function (req, res) {
             page: page,
             posts : result
         });
+    });
+}
+
+exports.postRest = function (req, res) {
+    Post.remove({}, (err) => {
+        console.log(err);
+        console.log('collection removed');
     });
 }
