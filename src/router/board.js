@@ -18,6 +18,8 @@ router.get("/board_write/:title", (req, res) => {
     })
 })
 
+router.get("/board_view/:postId", controller.viewPost);
+
 router.post("/board/write/:title", controller.registPost);
 
 // router.get("/board/reset", controller.postRest); // for debug

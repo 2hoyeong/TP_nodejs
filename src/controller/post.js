@@ -29,7 +29,6 @@ exports.viewPostList = function (req, res) {
     const page = req.params.page;
     const maxPostOnPage = 10;
     paginate.getPostsPage(page, maxPostOnPage, title, (result) => {
-        console.log("RESULT : " + result);
         res.render('board/board.html',    
         {
             id: req.session.user,
@@ -37,6 +36,18 @@ exports.viewPostList = function (req, res) {
             board_title: title,
             page: page,
             posts : result
+        });
+    });
+}
+
+exports.viewPost = function (req, res) {
+    const postNum = req.params.postId;
+    Post.find()
+    .where('postNumber').equals(postNum).exec()
+    .then(result => {
+        res.render('board/post.html', {
+            id : req.session.user,
+            post : result[0]
         });
     });
 }

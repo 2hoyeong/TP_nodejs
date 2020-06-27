@@ -8,17 +8,14 @@ const postSchema = new Schema({
     boardName : { type: String, required: true },
     title: { type: String },
     content: { type: String },
+    like : { type: Number, default: 0 },
     time : { type : Date, default: Date.now }
 });
-
-/*postSchema.post('save', (doc) => {
-    console.log(doc);
-})*/
 
 autoIncrement.initialize(mongoose.connection);
 postSchema.plugin(autoIncrement.plugin, {
     model:'Post',
-    field: 'postNumber', // auto-increment할 field
+    field: 'postNumber',
     startAt: 1,
     increment: 1
 });
