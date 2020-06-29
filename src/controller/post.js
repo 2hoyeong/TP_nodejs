@@ -1,5 +1,6 @@
 const Post = require("../model/Post");
 const paginate = require('./paginate');
+const reply = require('./reply');
 
 const boardName = {
     freeboard : "자유게시판",
@@ -12,8 +13,6 @@ exports.registPost = function (req, res) {
     post.boardName = req.params.title;
     post.title = req.body.bTitle;
     post.content = req.body.bContent;
-
-    console.log("POST : " + post);
 
     post.save()
     .then(() => {return res.json({result: 1})})
@@ -42,12 +41,17 @@ exports.viewPostList = function (req, res) {
 
 exports.viewPost = function (req, res) {
     const postNum = req.params.postId;
-    Post.find()
-    .where('postNumber').equals(postNum).exec()
+    let replys;
+    reply.getReplysPost(postNum)
+    .then(reply_result => {
+        replys = reply_result;
+        return Post.find().where('postNumber').equals(postNum).exec();
+    })
     .then(result => {
         res.render('board/post.html', {
             id : req.session.user,
-            post : result[0]
+            post : result[0],
+            replys : replys
         });
     });
 }
