@@ -13,7 +13,13 @@ exports.getReplysPost = function(postNum, callback) {
 
 exports.writeReply = function(req, res) {
     const reply = new Reply();
-    reply.postNumber = req.body.
-    reply.author 
-    reply.content = req.body.
+    reply.postNumber = req.body.postNumber;
+    reply.author = req.session.user;
+    reply.content = req.body.comment;
+    reply.save()
+    .then(() => {return res.json({result: 1})})
+    .catch(err => {
+        res.json({result: 0, err});
+        return;
+    });
 }

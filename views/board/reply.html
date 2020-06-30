@@ -7,6 +7,7 @@
 <div style="margin-bottom : 35px;">
 <textarea class="form-control" name="comment" placeholder="댓글을 입력하세요." required style="margin-bottom : 10px; resize : none;"></textarea>
 <button type="submit" class="btn btn-info fr" id="reply-btn" >댓글등록</button>
+<input type="hidden" name="postNumber" value="<%= post.postNumber %>"> 
 <!-- <input type="hidden" name="PostID" value="<?=$_GET['id']?>"></input> -->
 </div>
 </form>
@@ -25,32 +26,29 @@
     </div>
 	</div>
 </div>
-<?php
-  $postid = $_GET['id'];
-  $query = "select * from comment where `PostID` = {$postid}";
-  $result = sqlSelect($query);
-  if($result) {
-while ($row = mysqli_fetch_array($result)) {
-?>
+<%
+  if(replys) {
+    for (var i = 0; i < replys.length; i++) {
+%>
 <div class="container" float: left style="border-top:1px solid; padding:10px;">
   <div class="row">
 <div class = "col" role="alert">
- <?=$row[3]?>
+ <%= replys[i].author %>
 </div>
 <div class="col-6" role="alert">
- <?=$row[2]?>
+ <%= replys[i].content %>
 </div><div class="col" role="alert">
- <?=$row[4]?>
+ <%= replys[i].time %>
 </div>
   </div>
 </div>
-<?php
-}
-  } else {
-	  ?>
+<%
+  }
+} else {
+%>
 	  <div class="container" float: left style="border-top:1px solid; padding:10px;">
 		등록된 댓글이 없습니다.
 	  </div>
-	  <?php
+	  <%
   }
-?>
+%>

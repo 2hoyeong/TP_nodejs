@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const replySchema = new Schema({
     postNumber: { type: Number, required: true },
-    replyNumber: { type: Number, required: true },
+    replyNumber: { type: Number },
     author: { type: String, required: true },
     content: { type: String },
     time : { type : Date, default: Date.now }

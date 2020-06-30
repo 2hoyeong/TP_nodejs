@@ -8,7 +8,8 @@ const mongoose = require('mongoose');
 
 const indexRouter = require('./src/router/index');
 const loginRouter = require('./src/router/login');
-const boardRouter = require('./src/router/board')
+const boardRouter = require('./src/router/board');
+const replyRouter = require('./src/router/reply');
 
 const options = {
     host: process.env.HOST,
@@ -42,6 +43,7 @@ class Server {
         this.app.use(indexRouter);
         this.app.use(loginRouter);
         this.app.use(boardRouter);
+        this.app.use(replyRouter);
     }
 
     setEngine() {
