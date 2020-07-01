@@ -2,6 +2,7 @@ const request = require('supertest');
 const should = require('should');
 
 const Server = require('../app');
+const User = require('../src/model/User');
 const server = new Server();
 
 describe('GET /login', () => {
@@ -49,6 +50,37 @@ describe('GET /forgot_pw', () => {
   });
 });
 
-describe('POST /api/login', () => {
-    
+describe('POST /api/register', () => {
+    beforeEach(done => {
+        User.remove({}).then(done());
+    });
+    it('should registe user', function (done) {
+        request(server.app)
+            .post('/api/register')
+            .set('Accept','application/json')
+            .send({"id": "testuser", "password_1": "test", "password_2": "test", "email" : "testuser@travelplanner.com"})
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .end(function (err, res) {
+                res.body.result.should.equal(1);
+                done();
+            });
+    });
 });
+
+describe('POST /api/login', () => {
+    it('should get user session for current user', function (done) {
+        request(server.app)
+            .post('/api/login')
+            .set('Accept','application/json')
+            .send({"id": "testuser", "password": "test1"})
+            .expect('Content-Type', /json/)
+            .expect(302)
+            .end(function (err, res) {
+                if (Object.keys(res.body).length !== 0) {
+                    res.body.result.should.not.equal(0);
+                }
+                done();
+            });
+    });
+})
