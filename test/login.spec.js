@@ -73,7 +73,7 @@ describe('POST /api/login', () => {
         request(server.app)
             .post('/api/login')
             .set('Accept','application/json')
-            .send({"id": "testuser", "password": "test1"})
+            .send({"id": "testuser", "password": "test"})
             .expect('Content-Type', /json/)
             .expect(302)
             .end(function (err, res) {
