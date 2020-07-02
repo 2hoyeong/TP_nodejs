@@ -5,9 +5,12 @@ const Server = require('../app');
 const Post = require('../src/model/Post');
 const server = new Server();
 
+const agent = require('./login.spec')
+
 describe('POST /api/board/write/freeboard', () => {
-    beforeEach(done => {
-        request.agent(server.app)
+    before(done => {
+        Post.remove({}).then();
+        agent
         .post('/api/login')
         .send({ id : "testuser", password : "test" })
         .end(function(err, res) {
@@ -16,19 +19,16 @@ describe('POST /api/board/write/freeboard', () => {
         });
     });
     it('should write post on freeboard', function (done) {
-        request(server.app)
+        agent
             .post('/api/board/write/freeboard')
             .set('Accept','application/json')
             .send({
-                "author": "testuser", 
-                "boardName": "freeboard", 
-                "title": "testtitle", 
-                "content" : "test content"
+                "bTitle": "testtitle", 
+                "bContent" : "test content"
             })
             .expect('Content-Type', /json/)
             .expect(200)
             .end(function (err, res) {
-                console.log(res.body)
                 res.body.result.should.equal(1);
                 done();
             });

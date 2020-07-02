@@ -5,6 +5,8 @@ const Server = require('../app');
 const User = require('../src/model/User');
 const server = new Server();
 
+let agent = request.agent(server.app);
+
 describe('GET /login', () => {
   it('login view should contain text', (done) => {
     request(server.app)
@@ -70,7 +72,7 @@ describe('POST /api/register', () => {
 
 describe('POST /api/login', () => {
     it('should get user session for current user', function (done) {
-        request(server.app)
+        agent
             .post('/api/login')
             .set('Accept','application/json')
             .send({"id": "testuser", "password": "test"})
@@ -84,3 +86,5 @@ describe('POST /api/login', () => {
             });
     });
 })
+
+module.exports = agent;

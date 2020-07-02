@@ -13,7 +13,6 @@ exports.registPost = function (req, res) {
     post.boardName = req.params.title;
     post.title = req.body.bTitle;
     post.content = req.body.bContent;
-
     post.save()
     .then(() => {return res.json({result: 1})})
     .catch(err => {
