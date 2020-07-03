@@ -53,7 +53,7 @@ describe('GET /forgot_pw', () => {
 });
 
 describe('POST /api/register', () => {
-    beforeEach(done => {
+    before(done => {
         User.remove({}).then(done());
     });
     it('should registe user', function (done) {
