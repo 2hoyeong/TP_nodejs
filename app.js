@@ -12,8 +12,8 @@ const boardRouter = require('./src/router/board');
 const replyRouter = require('./src/router/reply');
 
 const options = {
-    host: process.env.HOST,
-    port: process.env.PORT
+    host: process.env.HOST || '0.0.0.0',
+    port: process.env.PORT || '3000'
 };
 
 class Server {
@@ -61,8 +61,9 @@ class Server {
     }
 
     async setDB() {
+        const Uri = process.env.MONGO_URI || "mongodb://localhost/travelplanner"
         mongoose.Promise = global.Promise;
-        mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+        mongoose.connect(Uri, { useNewUrlParser: true, useUnifiedTopology: true })
             .then(() => console.log('Successfully connected to mongodb'))
             .catch(e => console.error(e));
     }
