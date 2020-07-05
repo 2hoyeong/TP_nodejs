@@ -10,6 +10,7 @@ const indexRouter = require('./src/router/index');
 const loginRouter = require('./src/router/login');
 const boardRouter = require('./src/router/board');
 const replyRouter = require('./src/router/reply');
+const areaRouter = require('./src/router/area');
 
 const options = {
     host: process.env.HOST || '0.0.0.0',
@@ -44,6 +45,7 @@ class Server {
         this.app.use(loginRouter);
         this.app.use(boardRouter);
         this.app.use(replyRouter);
+        this.app.use(areaRouter);
     }
 
     setEngine() {
