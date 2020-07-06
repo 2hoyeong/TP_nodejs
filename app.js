@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({path: '../.env' });
 const express = require("express")
 const session = require('express-session');
 const ejs = require('ejs');
@@ -11,6 +11,7 @@ const loginRouter = require('./src/router/login');
 const boardRouter = require('./src/router/board');
 const replyRouter = require('./src/router/reply');
 const areaRouter = require('./src/router/area');
+
 
 const options = {
     host: process.env.HOST || '0.0.0.0',
@@ -63,10 +64,10 @@ class Server {
     }
 
     async setDB() {
-        const Uri = process.env.MONGO_URI || "mongodb://localhost/travelplanner"
+        const Uri = process.env.MONGO_URI || "mongodb://localhost/travelplanner_test"
         mongoose.Promise = global.Promise;
         mongoose.connect(Uri, { useNewUrlParser: true, useUnifiedTopology: true })
-            .then(() => console.log('Successfully connected to mongodb'))
+            .then(() => console.log('Successfully connected to mongodb\n', Uri))
             .catch(e => console.error(e));
     }
 }
