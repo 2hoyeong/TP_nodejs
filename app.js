@@ -1,4 +1,4 @@
-require('dotenv').config({path: '../../.env' });
+require('dotenv').config({path: '../.env' });
 const express = require("express")
 const session = require('express-session');
 const ejs = require('ejs');
@@ -14,7 +14,7 @@ const areaRouter = require('./src/router/area');
 
 
 const options = {
-    host: process.env.HOST || '0.0.0.0',
+    host: process.env.HOST || '127.0.0.1',
     port: process.env.PORT || '3000'
 };
 
