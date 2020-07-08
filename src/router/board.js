@@ -7,9 +7,9 @@ const boardName = {
     qna : "Q&A"
 }
 
-router.get("/board/:title/:page", authCheck.authChecker, controller.viewPostList);
+router.get("/board/:title/:page", authCheck.authLoginCheck, controller.viewPostList);
 
-router.get("/board_write/:title", authCheck.authChecker, (req, res) => {
+router.get("/board_write/:title", authCheck.authLoginCheck, (req, res) => {
     const title = req.params.title;
     res.render('board/board_write.html',
     {
@@ -19,9 +19,9 @@ router.get("/board_write/:title", authCheck.authChecker, (req, res) => {
     })
 })
 
-router.get("/board_view/:postId", authCheck.authChecker, controller.viewPost);
+router.get("/board_view/:postId", authCheck.authLoginCheck, controller.viewPost);
 
-router.post("/api/board/write/:title", authCheck.authChecker, controller.registPost);
+router.post("/api/board/write/:title", authCheck.authLoginCheck, controller.registPost);
 
 // router.get("/board/reset", controller.postRest); // for debug
 

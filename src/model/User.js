@@ -6,8 +6,8 @@ const userSchema = new Schema({
     id: { type: String, required: true, unique: true },
     pw: { type: String, required: true, trim: true },
     salt: { type: String, required: true },
-    email: String
-
+    email: String,
+    role: { type: Number, default: 0 }
 });
 
 userSchema.path('id').validate((value) => {
