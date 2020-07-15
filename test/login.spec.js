@@ -85,6 +85,13 @@ describe('POST /api/login', () => {
                 done();
             });
     });
+    after(() => {
+        agent
+            .get('/api/admin')
+            .expect(302)
+            .end(function (err, res) {
+            });
+    })
 })
 
 module.exports = agent;

@@ -16,15 +16,16 @@ describe('POST /api/area/add/country', () => {
             .post('/api/area/add/country')
             .set('Accept','application/json')
             .send({
+                "area_type" : "1",
                 "name_kor" : "대한민국",
                 "name_eng" : "Korea",
                 "image" : "",
-                "desc" : "",
-                "continent" : "Asia",
+                "description" : "",
             })
-            .expect('Content-Type', /json/)
             .expect(200)
             .end(function (err, res) {
+                console.log(`err : ${err}`)
+                console.log(res.body.result);
                 res.body.result.should.equal(1);
                 done();
             });
