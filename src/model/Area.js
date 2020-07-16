@@ -10,7 +10,7 @@ const Schema = mongoose.Schema;
  **/
 
 const areaSchema = new Schema({
-    areaType: { type: Number, required: true },
+    area_type: { type: Number, required: true },
     name_kor: { type: String, required: true },
     name_eng: { type: String, required: true },
     image: { type: String },

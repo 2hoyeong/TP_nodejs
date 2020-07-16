@@ -94,4 +94,28 @@ describe('POST /api/login', () => {
     })
 })
 
+describe('POST /api/login', () => {
+    it('should get user session for current user', function (done) {
+        agent
+            .post('/api/login')
+            .set('Accept','application/json')
+            .send({"id": "testuser", "password": "test"})
+            .expect('Content-Type', /json/)
+            .expect(302)
+            .end(function (err, res) {
+                if (Object.keys(res.body).length !== 0) {
+                    res.body.result.should.not.equal(0);
+                }
+                done();
+            });
+    });
+    after(() => {
+        agent
+            .get('/api/admin')
+            .expect(302)
+            .end(function (err, res) {
+            });
+    })
+})
+
 module.exports = agent;

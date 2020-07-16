@@ -8,7 +8,7 @@ const agent = require('./login.spec')
 
 describe('POST /api/area/add/country', () => {
     before(done => {
-        // Area.remove({}).then(done());
+        Area.remove({}).then(done());
         done();
     });
     it('should add country', function (done) {
@@ -24,8 +24,6 @@ describe('POST /api/area/add/country', () => {
             })
             .expect(200)
             .end(function (err, res) {
-                console.log(`err : ${err}`)
-                console.log(res.body.result);
                 res.body.result.should.equal(1);
                 done();
             });

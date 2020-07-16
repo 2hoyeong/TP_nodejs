@@ -1,9 +1,9 @@
 const User = require("../model/User");
 
 const userAuthentication = {
-    0: "User",
-    1: "Admin",
-    5: "SuperAdmin",
+    User : 0,
+    Admin : 1,
+    SuperAdmin : 5,
 }
 
 exports.authLoginCheck = function(req, res, next) {
