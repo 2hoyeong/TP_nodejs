@@ -69,7 +69,8 @@ exports.loginCheck = function(req, res) {
     .then((key) => {
         if (key === user.pw) {
             sess.user = user;
-            res.redirect('/');
+            // res.redirect('/');
+            res.redirect(req.session.backURL || '/')
         } else {
             throw '비밀번호가 맞지 않음';
         }

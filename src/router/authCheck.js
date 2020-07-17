@@ -18,7 +18,7 @@ exports.authAdminCheck = function(req, res, next) {
     if (authenticationCheck(req.session.user, "Admin")) {
         next();
     } else {
-        res.redirect("/login");
+        res.redirect(req.session.backURL || '/')
     }
 }
 
@@ -26,7 +26,7 @@ exports.authSuperAdminCheck = function(req, res, next) {
     if (authenticationCheck(req.session.user, "SuperAdmin")) {
         next();
     } else {
-        res.redirect("/login");
+        res.redirect(req.session.backURL || '/')
     }
 }
 

@@ -1,10 +1,10 @@
 const Area = require("../model/Area");
 
 const areaType = {
-  continent : 0,
-  country : 1,
-  city : 2,
-  attraction : 3,
+  continent: 0,
+  country: 1,
+  city: 2,
+  attraction: 3,
 };
 
 exports.getCountryList = function (req, res) {
@@ -37,3 +37,16 @@ exports.addCountry = function (req, res) {
       return;
     });
 };
+
+exports.cityRegistView = function (req, res) {
+  res.render("area/admin/city_regist.html", {
+    id: req.session.user,
+  });
+};
+
+exports.cityEditView = function (req, res) {
+  res.render("area/admin/edit_city_info.html", {
+    id: req.session.user,
+  });
+};
+
