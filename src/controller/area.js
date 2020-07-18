@@ -45,8 +45,10 @@ exports.cityRegistView = function (req, res) {
 };
 
 exports.cityEditView = function (req, res) {
+  const city_name = req.params.city_name;
   res.render("area/admin/edit_city_info.html", {
     id: req.session.user,
+    city : city_name,
   });
 };
 
