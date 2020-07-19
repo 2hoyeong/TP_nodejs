@@ -38,8 +38,8 @@ exports.addCountry = function (req, res) {
     });
 };
 
-exports.cityRegistView = function (req, res) {
-  res.render("area/admin/city_regist.html", {
+exports.areaRegistView = function (req, res) {
+  res.render("area/admin/area_regist.html", {
     id: req.session.user,
   });
 };

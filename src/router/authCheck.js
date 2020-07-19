@@ -31,9 +31,10 @@ exports.authSuperAdminCheck = function(req, res, next) {
 }
 
 function authenticationCheck(user, level) {
-    if (user.role >= userAuthentication[level]) {
-        return true;
-    } else {
-        return false;
+    if (req.session.user) {
+        if (user.role >= userAuthentication[level]) {
+            return true;
+        }
     }
+    return false;
 }

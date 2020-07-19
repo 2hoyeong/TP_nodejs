@@ -3,7 +3,7 @@
 <script>
 function changedCountry(obj) {
 	var c_ID = obj.value;
-	<?php echo "var c_list = ".json_encode(getCityList()).";"?>
+	<%="var c_list = ".json_encode(getCityList()).";"%>
 	var city = document.getElementById('city');
 	var cec = city.childElementCount;
 
@@ -30,7 +30,7 @@ function changedCountry(obj) {
 
 <div>
 <div class="board_title">
-	도시 등록 페이지
+	지역 등록 페이지
 </div>
 <form enctype='multipart/form-data' action='<?=BBSPATH?>/upload.php?category=city' method='post'>
 	<select name="fkid" id="fkid" onchange="changedCountry(this);">
@@ -51,7 +51,7 @@ function changedCountry(obj) {
 	
 	</ul>
 	
-	
+	<input type="hidden" name="type">
 	<!-- 
 	<input type="file" name="myfile">
 	<button>명소 이미지 등록</button>
