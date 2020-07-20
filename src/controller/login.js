@@ -112,5 +112,6 @@ exports.logout = function (req, res) {
 
 exports.getAdminAuthForDebug = function(req, res) {
     req.session.user.role = 5;
-    res.redirect('/');
+    req.session.user.save()
+    .then(() => res.redirect('/'))
 }
