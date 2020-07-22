@@ -111,7 +111,12 @@ exports.logout = function (req, res) {
 }
 
 exports.getAdminAuthForDebug = function(req, res) {
-    req.session.user.role = 5;
-    req.session.user.save()
-    .then(() => res.redirect('/'))
+    User.findOneAndUpdate(
+        { _id : req.session.user._id },
+        { role : 5 },
+        (err, doc) => {
+            req.session.user = doc;
+            res.redirect('/');
+        }
+    );
 }
