@@ -1,28 +1,5 @@
 <%- include('../../header.html'); %>
 
-<script>
-function changedCountry(obj) {
-	var c_ID = obj.value;
-	<%="var c_list = ".json_encode(getCityList()).";"%>
-	var city = document.getElementById('city');
-	var cec = city.childElementCount;
-
-	for (var i = 0; i < cec; i++) {
-		city.removeChild(city.children[0]);
-	}
-
-	for (key in c_list) {
-		if(c_list[key].split(",")[0] == c_ID) {
-			var ul = document.createElement("li");
-			var node = document.createTextNode("["+ key + "] " + c_list[key].split(",")[1]);
-			ul.appendChild(node);
-			city.appendChild(ul);
-		}
-	}
-	
-}
-</script>
-
 <style>
 	.c_list { font-size : 14px; }
 	.c_list li { margin-top : 10px; }
@@ -46,7 +23,7 @@ function changedCountry(obj) {
 	<input type="text" name="name" placeholder="도시 이름을 입력하세요">
 	<input type="submit" value="도시 등록">
 	<hr>
-	<span style="font-size:14px;">■ 해당 나라에 등록된 도시 리스트</span>
+	<span style="font-size:14px;">■ 해당 지역에 등록된 하위 지역 리스트</span>
 	<ul id="city" class="c_list">
 	
 	</ul>
