@@ -1,11 +1,7 @@
 const router = require('express').Router();
 const controller = require('../controller/post');
 const authCheck = require('./authCheck');
-
-const boardName = {
-    freeboard : "자유게시판",
-    qna : "Q&A"
-}
+const boardName = require('../model/enum/board_enum')
 
 router.get("/board/:title/:page", authCheck.authLoginCheck, controller.viewPostList);
 

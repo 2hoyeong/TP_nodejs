@@ -1,11 +1,7 @@
 const Post = require("../model/Post");
 const paginate = require('./paginate');
 const reply = require('./reply');
-
-const boardName = {
-    freeboard : "자유게시판",
-    qna : "Q&A"
-}
+const boardName = require('../model/enum/board_enum')
 
 exports.registPost = function (req, res) {
     const post = new Post();

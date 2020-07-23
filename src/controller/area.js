@@ -1,11 +1,5 @@
 const Area = require("../model/Area");
-
-const areaType = {
-  continent: 0,
-  country: 1,
-  city: 2,
-  attraction: 3,
-};
+const areaType = require('../model/enum/area_enum')
 
 exports.getCountryList = function (req, res) {
   Area.find({})
