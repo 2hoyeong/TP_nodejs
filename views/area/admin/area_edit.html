@@ -1,0 +1,29 @@
+<%- include('../../header.html'); %>
+
+<style>
+	.c_list { font-size : 14px; }
+	.c_list li { margin-top : 10px; }
+	.c_list li img { max-width : 200px; max-height : 200px; }
+</style>
+
+<div>
+<div class="board_title">
+	<%= area_type_name %> 설정 페이지
+</div>
+<form enctype='multipart/form-data' action='<?=BBSPATH?>/edit_info.php?category=city' method='post'>
+	<input type="text" name="explain" placeholder="<%= area_type_name %> 설명을 입력하세요">
+	<br>
+	<input type="file" name="myfile">
+	<input type="submit" value="저장하기">
+	<hr>
+	<span style="font-size:14px;">■ 해당 <%= area_type_name %>에 등록된 설명</span>
+	<ul id="explain" class="c_list">
+		<li> 설명 : <%= area && area.description ? area.description : "저장된 설명이 없습니다." %></li>
+		<li>이미지<br><br>
+			<img src="<%= area && area.images ? area.images : '' %>">
+		</li>
+	</ul>
+</form>
+</div>
+
+<%- include('../../footer.html'); %>

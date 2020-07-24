@@ -16,6 +16,11 @@ const areaSchema = new Schema({
     image: { type: String },
     description: { type: String },
     like : { type: Number, default: 0 },
+    area_id : {
+        type    : mongoose.Schema.Types.ObjectId,
+        default : mongoose.Types.ObjectId,
+        index   : { unique: true }
+    }
 });
 
 autoIncrement.initialize(mongoose.connection);

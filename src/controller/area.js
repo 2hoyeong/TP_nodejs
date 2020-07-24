@@ -2,10 +2,7 @@ const Area = require("../model/Area");
 const areaType = require('../model/enum/area_enum')
 
 exports.getCountryList = function (req, res) {
-  Area.find({})
-    .where("areaType")
-    .equals(1)
-    .exec()
+  getAreaListByType(type)
     .then((countries) => {
       res.render("area/country/countryList.html", {
         id: req.session.user,
@@ -16,13 +13,12 @@ exports.getCountryList = function (req, res) {
 
 exports.addCountry = function (req, res) {
   const area = new Area();
-  area.area_type = areaType[req.params.area_type];
+  area.area_type = areaType[req.params.area_type].value.code;
   area.name_kor = req.body.name_kor;
   area.name_eng = req.body.name_eng;
   area.image = req.body.image;
   area.description = req.body.description;
-  area
-    .save()
+  area.save()
     .then(() => {
       return res.json({ result: 1 });
     })
@@ -38,11 +34,56 @@ exports.areaRegistView = function (req, res) {
   });
 };
 
-exports.cityEditView = function (req, res) {
-  const city_name = req.params.city_name;
-  res.render("area/admin/edit_city_info.html", {
+exports.areaEditView = function (req, res) {
+  let editedArea;
+  const isAddAreaMode = req.params.area_id === undefined
+  if (isAddAreaMode) {
+    editedArea = undefined
+  } else {
+    editedArea = getAreaById(req.params.area_id);
+  }
+  
+  res.render("area/admin/area_edit.html", {
     id: req.session.user,
-    city : city_name,
+    area: editedArea,
+    area_type_name : areaType[req.params.area_type].value.name,
   });
 };
 
+const getArea = function(where, equal) {
+  return new Promise((resolve, reject) => {
+    Area.find({})
+    .where(where).equals(equal)
+    .exec()
+    .then((countries) => {
+      resolve(countries);
+    })
+    .catch((err) => {
+      reject(err);
+    })
+});
+}
+
+const getAreaListByType = function(type) {
+  return new Promise((resolve, reject) => {
+      getArea("area_type", type)
+      .then((countries) => {
+        resolve(countries);
+      })
+      .catch((err) => {
+        reject(err);
+      })
+  });
+}
+
+const getAreaById = function(id) {
+  return new Promise((resolve, reject) => {
+      getArea("area_id", id)
+      .then((countries) => {
+        resolve(countries);
+      })
+      .catch((err) => {
+        reject(err);
+      })
+  });
+}

@@ -10,19 +10,15 @@
 	지역 등록 페이지
 </div>
 <form enctype='multipart/form-data' action='<?=BBSPATH?>/upload.php?category=city' method='post'>
-	<input type="text" name="name" placeholder="지역 이름을 입력하세요">
-	<input type="submit" value="지역 등록">
+	<!-- <input type="text" name="name" placeholder="지역 이름을 입력하세요">
+	<input type="submit" value="지역 등록"> -->
 	<hr>
-	<span style="font-size:14px;">■ 해당 지역에 등록된 하위 지역 리스트</span>
+	<span style="font-size:14px;">■ 등록된 지역 리스트</span>
+	<span class="fr"><input type="button" value="등록하기" onclick="window.location.href = window.location.href + '/edit'"></span>
 	<ul id="city" class="c_list">
 	
 	</ul>
-	
 	<input type="hidden" name="type">
-	<!-- 
-	<input type="file" name="myfile">
-	<button>명소 이미지 등록</button>
-	-->
 </form>
 </div>
 
