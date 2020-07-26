@@ -1,10 +1,5 @@
 const User = require("../model/User");
-
-const userAuthentication = {
-    User : 0,
-    Admin : 1,
-    SuperAdmin : 5,
-}
+const userAuthentication = require('../model/enum/authentication')
 
 exports.authLoginCheck = function(req, res, next) {
     if (req.session.user) {
